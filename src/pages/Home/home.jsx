@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { getMovies } from "../../api/movies"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
+import MovieCard from "../../components/MovieCards/movieCard"
 
 export const Home = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,11 @@ export const Home = () => {
     return (
         <>
             <Navbar />
+            <main style={{display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", marginTop: "20px"}}>
+                {movies && movies.map(movie => (
+                    <MovieCard key={movie.id} movie={movie}/>
+                ))}
+            </main>
         </>
     )
 }
