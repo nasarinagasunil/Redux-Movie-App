@@ -10,8 +10,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import SelectorComponent from '../selectorComponents/selectorComponents';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from '../../slices/movieSlice';
-import { getMoviesBySearch } from '../../api/movies';
+import { getAllGenres, getMoviesBySearch } from '../../api/movies';
 import { debounce } from 'lodash';
+import { useEffect } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -55,17 +56,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar() {
     const dispatch = useDispatch();
-    const { searchValue } = useSelector(state => state.movies);
+    
+    useEffect(() => {
+        dispatch(getAllGenres());
+    }, []);
+
+    const { genres } = useSelector(state => state.movies);
 
     const onSearchChange = debounce((e) => {
         dispatch(getMoviesBySearch(e.target.value));
     }, 500);
 
-    console.log(searchValue);
-
     return (
-        <Box sx={{ flexGrow: 1, mt: 0 }}>
-            <AppBar position="static" sx={{ marginTop: 0 }}>
+        <Box sx={{ flexGrow: 1, mt: 0, mb:10 }}>
+            <AppBar position="fixed" sx={{ marginTop: 0, padding: 1, backgroundColor: "#1900ffff" }}>
                 <Toolbar>  
                     <Typography
                         variant="h6"
@@ -86,8 +90,8 @@ export default function Navbar() {
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <SelectorComponent />
-                        <SelectorComponent />
+                        <SelectorComponent name="Genres" value={genres} />
+                        <SelectorComponent name="Ratings" value={[]} />
                     </Box>
                 </Toolbar>
             </AppBar>

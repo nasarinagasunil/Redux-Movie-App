@@ -10,8 +10,7 @@ export const Home = () => {
     const dispatch = useDispatch();
     const {movies, searchValue} = useSelector(state => state.movies);
 
-    console.log(movies);
-    
+
     // const filteredMovies = getMoviesBySearch(movies, searchValue);
     // console.log(filteredMovies);    
 
