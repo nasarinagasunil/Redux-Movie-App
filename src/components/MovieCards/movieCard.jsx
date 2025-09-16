@@ -30,10 +30,11 @@ export default function MovieCard({ movie }) {
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           Writen By : {movie.writer_name}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Genre: <Chip label={movie.genre} />
-        </Typography>
-        
+        {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          Genre: 
+        </Typography> */}
+
+        Genre: <Chip label={movie.genre} />
       </CardContent>
       <CardActions>
         <FavoriteIcon sx={{ color: 'red' }}/>
